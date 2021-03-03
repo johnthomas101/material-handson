@@ -11,6 +11,8 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
 
+import CustomEditor from '../CustomEditor/CustomEditor';
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -24,25 +26,46 @@ const theme = createMuiTheme({
 
 const Main = props => {
     const [state, setState] = useState("Hello World");
+    const [markup, setMarkup] = useState("Nothing here yet");
+    const [markupObj, setMarkupObj] = useState(null);
+
+    const outerEditorAction = (obj, text) => {
+      setMarkup(obj.html);
+      setMarkupObj(obj.obj);
+      console.log(obj);
+    }  
+
     return <ThemeProvider theme={theme}>
             <Container maxWidth="xs">
                 <Grid container justify="center">
                 <Grid item>
                     <Paper>
-                        Hello
+                        Draft JS POC
                     </Paper>
                 </Grid>
+
                 <Grid item>
                     <Paper>
-                        Hello
+                      <CustomEditor 
+                      readOnly={false}
+                      outerAction={outerEditorAction}/>
                     </Paper>
                 </Grid>
+
+                {/* <Grid item>
+                    <Paper>
+                      <CustomEditor 
+                      readOnly={true}
+                      // outerAction={outerEditorAction}
+                      detailsObj={markupObj}/>
+                    </Paper>
+                </Grid> */}
                 </Grid>
                 <Box component="span" m={1}>
-                    <Button 
-                    size="large"
-                    variant="contained" 
-                    color="primary">Hello World</Button>
+                <div
+                dangerouslySetInnerHTML={{
+                  __html: markup
+                }}></div>
                 </Box>
             </Container>
         </ThemeProvider> ;

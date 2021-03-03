@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ReactComponent as EichibaLogo } from './logo.svg' ;
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    {/* <EichibaLogo/> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
